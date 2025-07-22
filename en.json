@@ -1,0 +1,12 @@
+{
+  "invalid_number": "Please use a valid number: `!words 1500`, `!words +500`, or `!words -300`.",
+  "words_set": "✅ Word count updated:\n- This month ({month}): **{monthly}**",
+  "words_set_all": "✅ Word count updated:\n- This month ({month}): **{monthly}**\n- Total: **{total}**",
+  "words_show_monthly": "📅 Your word count for **{month}** is **{monthly}**.",
+  "words_show_all": "📊 Word counts:\n- This month ({month}): **{monthly}**\n- All time: **{total}**",
+  "leaderboard_empty": "No word counts reported yet for **{month}**.",
+  "leaderboard_title": "🏆 **Monthly Leaderboard ({month}):**\n{entries}",
+  "leaderboard_entry": "{rank}. {username} - {count} words",
+  "help": "📖 **Writing Tracker Bot — Commands:**\n\n**General**\n• `!help` — Show this help message\n\n**Word Tracking**\n• `!words` — Show your current word count for this month\n• `!words all` — Show your current and total word count\n• `!words <number>` — Set your word count for this month (e.g., `!words 1200`)\n• `!words +<number>` — Add to your monthly and total count (e.g., `!words +500`)\n• `!words -<number>` — Subtract from your monthly and total count (e.g., `!words -100`)\n• `!words leaderboard` — See the top word counts for this month",
+  "error_saving": "Something went wrong while saving your data."
+}
