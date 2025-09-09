@@ -3,7 +3,7 @@ services:
     name: discord-writing-bot
     env: node
     plan: free
-    region: oregon
+    region: ohio
     buildCommand: "npm install"
     startCommand: "node bot.js"
     autoDeploy: true
