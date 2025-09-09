@@ -74,7 +74,7 @@ client.on('messageCreate', async message => {
   }
 
   if (command === strings.commands.leaderboard) {
-    const now = DateTime.now().setZone('America/Toronto');
+    const now = DateTime.now().setZone(process.env.TIMEZONE || 'America/Toronto');
     const monthKey = now.toFormat('yyyy-MM');
     const displayMonth = getDisplayMonth(now, false);
 

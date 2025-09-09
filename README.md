@@ -15,8 +15,6 @@ A Discord bot for tracking writing progress, with monthly totals, all-time total
 - **!wordcount** — During November, shows today’s NaNoWriMo target.
 - Support for French and English
 
-Note: All dates are currently only tracked in Eastern Time (ET) and respects daylight saving.
-
 ---
 
 ## Setup
