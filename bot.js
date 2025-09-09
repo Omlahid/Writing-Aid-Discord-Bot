@@ -43,7 +43,9 @@ function format(str, data = {}) {
 
 function getDisplayMonth(dt) {
   const currentYear = DateTime.now().year;
-  return dt.year === currentYear ? dt.toFormat('LLLL') : dt.toFormat('LLLL yyyy');
+  return dt.year === currentYear
+    ? dt.setLocale(lang).toFormat('LLLL')       // Month name only
+    : dt.setLocale(lang).toFormat('LLLL yyyy'); // Month name + year
 }
 
 client.once('ready', () => {
