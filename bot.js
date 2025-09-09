@@ -41,12 +41,23 @@ function format(str, data = {}) {
   return str.replace(/{(.*?)}/g, (_, key) => data[key] ?? `{${key}}`);
 }
 
-function getDisplayMonth(dt) {
+function getDisplayMonth(dt, cap) {
   const currentYear = DateTime.now().year;
-  return dt.year === currentYear
+  const raw = dt.year === currentYear
     ? dt.setLocale(lang).toFormat('LLLL')       // Month name only
     : dt.setLocale(lang).toFormat('LLLL yyyy'); // Month name + year
+
+  // Capitalize first letter only if locale supports casing
+  if (raw && raw.length > 0 && cap) {
+    const first = raw.charAt(0);
+    const upper = first.toUpperCase();
+    if (first !== upper) {
+      return upper + raw.slice(1);
+    }
+  }
+  return raw;
 }
+
 
 client.once('ready', () => {
   console.log(`Logged in as ${client.user.tag}`);
@@ -65,7 +76,7 @@ client.on('messageCreate', async message => {
   if (command === strings.commands.leaderboard) {
     const now = DateTime.now().setZone('America/Toronto');
     const monthKey = now.toFormat('yyyy-MM');
-    const displayMonth = getDisplayMonth(now);
+    const displayMonth = getDisplayMonth(now, false);
 
     const leaderboard = Object.entries(userData)
       .map(([id, data]) => ({
@@ -133,7 +144,7 @@ client.on('messageCreate', async message => {
     const now = modifier === 'yesterday' ? baseDate.minus({ days: 1 }) : baseDate;
 
     const monthKey = now.toFormat('yyyy-MM');
-    const displayMonth = getDisplayMonth(now);
+    const displayMonth = getDisplayMonth(now, true);
 
     if (!userData[userId]) {
       userData[userId] = { total: 0, monthly: {} };
@@ -152,7 +163,7 @@ client.on('messageCreate', async message => {
 
     if (input.toLowerCase() === strings.commands.all) {
       return message.reply(format(strings.words_show_all, {
-        month: displayMonth,
+        month: getDisplayMonth(now, false),
         monthly: currentMonthly,
         total: currentTotal
       }));

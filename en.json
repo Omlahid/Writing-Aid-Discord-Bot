@@ -8,8 +8,8 @@
     "all": "all"
   },
   "invalid_number": "Please use a valid number: `!words <current total>`, `!words +<words to add to total>`, or `!words -<words to remove from total>`.\nFor example: `!words 1500`, `!words +300`, or `!words -200`.",
-  "words_set": "Word count updated:\n- ({month}): **{monthly}**",
-  "words_set_all": "Word count updated:\n- ({month}): **{monthly}**\n- Total: **{total}**",
+  "words_set": "Word count updated:\n- {month}: **{monthly}**",
+  "words_set_all": "Word count updated:\n- {month}: **{monthly}**\n- Total: **{total}**",
   "words_show_monthly": "Your word count for **{month}** is **{monthly}**.",
   "words_show_all": "Word counts:\n- This month ({month}): **{monthly}**\n- All time: **{total}**",
   "leaderboard_empty": "No words yet for **{month}**.",

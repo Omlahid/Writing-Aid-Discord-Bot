@@ -8,8 +8,8 @@
     "all": "total"
   },
   "invalid_number": "Veuillez entrer un nombre valide : `!mots <total actuel>`, `!mots +<mots à ajouter>` ou `!mots -<mots à enlever>`.\nExemple : `!mots 1500`, `!mots +300` ou `!mots -200`.",
-  "words_set": "Nombre de mots mis à jour :\n- ({month}) : **{monthly}**",
-  "words_set_all": "Nombre de mots mis à jour :\n- ({month}) : **{monthly}**\n- Total : **{total}**",
+  "words_set": "Nombre de mots mis à jour :\n- {month} : **{monthly}**",
+  "words_set_all": "Nombre de mots mis à jour :\n- {month} : **{monthly}**\n- Total : **{total}**",
   "words_show_monthly": "Nombre de mots pour **{month}** est **{monthly}**.",
   "words_show_all": "Comptes de mots :\n- Ce mois-ci ({month}) : **{monthly}**\n- Gros total : **{total}**",
   "leaderboard_empty": "Aucun mot enregistré pour **{month}**.",
