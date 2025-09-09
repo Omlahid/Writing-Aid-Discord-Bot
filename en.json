@@ -1,4 +1,12 @@
 {
+  "commands": {
+    "words": "words",
+    "leaderboard": "leaderboard",
+    "help": "help",
+    "wordcount": "wordcount",
+    "yesterday": "yesterday",
+    "all": "all"
+  },
   "invalid_number": "Please use a valid number: `!words <current total>`, `!words +<words to add to total>`, or `!words -<words to remove from total>`.\nFor example: `!words 1500`, `!words +300`, or `!words -200`.",
   "words_set": "Word count updated:\n- ({month}): **{monthly}**",
   "words_set_all": "Word count updated:\n- ({month}): **{monthly}**\n- Total: **{total}**",
@@ -10,6 +18,6 @@
   "wordcount_not_november": "The word count goal is only available in November.",
   "wordcount_invalid_day": "Could not determine today’s word count goal. Please try again later.",
   "wordcount_today": "The goal for today is **{target} words**.",
-  "help": "**Available Commands:**\n• `!help`: Show this helpful message.\n\n**Word tracking:**\n• `!words`: Show your current monthly word count.\n• `!words all`: Show both your monthly and all-time totals.\n• `!leaderboard`: Show the top writers for the current month.\n• `!wordcount`: During November, shows the traditional daily target word count for today.\n\n**Word updates:**\n• `!words <number>`: Set your word count for this month (e.g., `!words 1500`).\n• `!words +<number>`: Add words to your monthly (e.g., `!words +300`).\n• `!words -<number>`: Subtract words from your monthly and all-time totals (e.g., `!words -200`).\n     • You can add `yesterday` at the end of these commands to add it to yesterday's total. Useful when adding it past midnight on the 1st.",
+  "help": "**Available Commands:**\n• `!help`: Show this helpful message.\n\n**Stats:**\n• `!words`: Show your current monthly word count.\n• `!words all`: Show both your monthly and all-time totals.\n• `!leaderboard`: Show the top writers for the current month.\n• `!wordcount`: During November, shows the traditional daily target word count for today.\n\n**Word updates:**\n• `!words <number>`: Set your word count for this month (e.g., `!words 1500`).\n• `!words +<number>`: Add words to your monthly (e.g., `!words +300`).\n• `!words -<number>`: Subtract words from your monthly total (e.g., `!words -200`).\n     • You can add `yesterday` at the end of these commands to add it to yesterday's total. Useful when adding it past midnight on the 1st.",
   "error_saving": "Something went wrong while saving your data."
 }

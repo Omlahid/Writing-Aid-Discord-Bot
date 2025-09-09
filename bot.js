@@ -16,7 +16,19 @@ const client = new Client({
   ]
 });
 
-const strings = JSON.parse(fs.readFileSync(path.join(__dirname, 'en.json'), 'utf8'));
+// Determine language
+const lang = process.env.LANGUAGE || 'en';
+let strings;
+
+try {
+  const langPath = path.join(__dirname, `${lang}.json`);
+  strings = JSON.parse(fs.readFileSync(langPath, 'utf8'));
+  console.log(`Loaded language file: ${lang}.json`);
+} catch (err) {
+  console.warn(`Could not load ${lang}.json, falling back to en.json`);
+  strings = JSON.parse(fs.readFileSync(path.join(__dirname, 'en.json'), 'utf8'));
+}
+
 const dataPath = path.join(__dirname, 'userData.json');
 const countPerDay = [
   1667, 3333, 5000, 6667, 8333, 10000, 11667, 13333, 15000,
@@ -44,11 +56,11 @@ client.on('messageCreate', async message => {
   const args = message.content.slice(PREFIX.length).trim().split(/ +/);
   const command = args.shift().toLowerCase();
 
-  if (command === 'help') {
+  if (command === 'help' || command === strings.commands.help) {
     return message.reply(strings.help);
   }
 
-  if (command === 'leaderboard') {
+  if (command === strings.commands.leaderboard) {
     const now = DateTime.now().setZone('America/Toronto');
     const monthKey = now.toFormat('yyyy-MM');
     const displayMonth = getDisplayMonth(now);
@@ -91,7 +103,7 @@ client.on('messageCreate', async message => {
     }));
   }
 
-  if (command === 'wordcount') {
+  if (command === strings.commands.wordcount) {
     const now = DateTime.now().setZone('America/Toronto');
 
     if (now.month !== 11) {
@@ -110,10 +122,10 @@ client.on('messageCreate', async message => {
     }));
   }
 
-    if (command === 'words') {
+    if (command === strings.commands.words) {
     const userId = message.author.id;
     let input = args[0];
-    const modifier = args[1] && args[1].toLowerCase() === 'yesterday' ? 'yesterday' : 'today';
+    const modifier = args[1] && args[1].toLowerCase() === strings.commands.yesterday ? 'yesterday' : 'today';
 
     const baseDate = DateTime.now().setZone('America/Toronto');
     const now = modifier === 'yesterday' ? baseDate.minus({ days: 1 }) : baseDate;
@@ -136,7 +148,7 @@ client.on('messageCreate', async message => {
       }));
     }
 
-    if (input.toLowerCase() === 'all') {
+    if (input.toLowerCase() === strings.commands.all) {
       return message.reply(format(strings.words_show_all, {
         month: displayMonth,
         monthly: currentMonthly,
