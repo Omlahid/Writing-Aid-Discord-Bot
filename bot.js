@@ -110,10 +110,14 @@ client.on('messageCreate', async message => {
     }));
   }
 
-  if (command === 'words') {
+    if (command === 'words') {
     const userId = message.author.id;
-    const input = args[0];
-    const now = DateTime.now().setZone('America/Toronto');
+    let input = args[0];
+    const modifier = args[1] && args[1].toLowerCase() === 'yesterday' ? 'yesterday' : 'today';
+
+    const baseDate = DateTime.now().setZone('America/Toronto');
+    const now = modifier === 'yesterday' ? baseDate.minus({ days: 1 }) : baseDate;
+
     const monthKey = now.toFormat('yyyy-MM');
     const displayMonth = getDisplayMonth(now);
 
@@ -158,14 +162,12 @@ client.on('messageCreate', async message => {
     newMonthly = Math.max(0, newMonthly);
     newTotal = Math.max(0, newTotal);
 
-    // ✅ Save using numeric key
     userEntry.monthly[monthKey] = newMonthly;
     userEntry.total = newTotal;
 
     try {
       fs.writeFileSync(dataPath, JSON.stringify(userData, null, 2));
       return message.reply(format(strings.words_set, {
-        // ✅ Display using user-friendly month
         month: displayMonth,
         monthly: newMonthly
       }));
