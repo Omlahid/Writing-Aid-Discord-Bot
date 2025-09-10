@@ -1,11 +1,11 @@
 {
   "commands": {
-    "words": "words",
+    "words": "mots",
     "leaderboard": "leaderboard",
-    "help": "help",
+    "help": "aide",
     "wordcount": "wordcount",
-    "yesterday": "yesterday",
-    "all": "all",
+    "yesterday": "hier",
+    "all": "total",
     "cheer": "cheer",
     "congrats": "congrats",
     "hydrate": "hydrate",
