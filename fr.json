@@ -1,11 +1,14 @@
 {
   "commands": {
-    "words": "mots",
+    "words": "words",
     "leaderboard": "leaderboard",
-    "help": "aide",
+    "help": "help",
     "wordcount": "wordcount",
-    "yesterday": "hier",
-    "all": "total"
+    "yesterday": "yesterday",
+    "all": "all",
+    "cheer": "cheer",
+    "congrats": "congrats",
+    "hydrate": "hydrate"
   },
   "invalid_number": "Veuillez entrer un nombre valide : `!mots <total actuel>`, `!mots +<mots à ajouter>` ou `!mots -<mots à enlever>`.\nExemple : `!mots 1500`, `!mots +300` ou `!mots -200`.",
   "words_set": "Nombre de mots mis à jour :\n- {month} : **{monthly}**",
@@ -18,6 +21,17 @@
   "wordcount_not_november": "L’objectif de mots est seulement disponible en novembre.",
   "wordcount_invalid_day": "Impossible de déterminer l’objectif de mots pour aujourd’hui. Veuillez réessayer plus tard.",
   "wordcount_today": "Objectif pour aujourd’hui : **{target} mots**.",
-  "help": "**Commandes disponibles :**\n• `!aide` : Affiche ce message d’aide.\n\n**Stats :**\n• `!mots` : Affiche votre nombre de mots actuel pour le mois.\n• `!mots total` : Affiche à la fois votre total mensuel et votre total à vie.\n• `!leaderboard` : Affiche les auteurs les plus prolifiques pour le mois en cours.\n• `!wordcount` : En novembre, affiche l’objectif quotidien traditionnel de mots pour aujourd’hui.\n\n**Update de mots :**\n• `!mots <nombre>` : Définit le nombre de mots du mois (ex. : `!mots 1500`).\n• `!mots +<nombre>` : Ajoute des mots au total mensuel (ex. : `!mots +300`).\n• `!mots -<nombre>` : Soustrait des mots du total mensuel (ex. : `!mots -200`).\n     • Vous pouvez ajouter `hier` à la fin de ces commandes pour les appliquer à hier. Utile pour ajouter des mots juste après minuit le 1er.",
+  "cheer": [
+    "Tu peux le faire ! https://media.tenor.com/Duz58nhPofEAAAAM/link-pompom.gif",
+    "Continue comme ça ! https://media0.giphy.com/media/v1.Y2lkPTZjMDliOTUyNGR5czJoZzdtejBlZHRjcWJiYW04Zm1mYzVubTl3azMxcno1dnd5NyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/5kIh9jg6olLrZJtAf6/giphy.gif",
+    "T'es capable ! https://i0.wp.com/media4.giphy.com/media/12XDYvMJNcmLgQ/giphy.gif"
+  ],
+  "congrats": [
+    "Félicitations ! https://i0.wp.com/renodadsblog.com/wp-content/uploads/2017/01/leonardo-dicaprio-celebrate-gif.gif?ssl=1",
+    "On le savait que t'étais capable ! https://y.yarn.co/32615f26-f724-452b-9d04-1a954bc7a5ef_text.gif",
+    "Congrats ! https://media.tenor.com/wnGqDLmrgfkAAAAM/mika-noah.gif"
+  ],
+  "hydrate": "Oubliez pas vos drinks gang! Ton café? Y devient froid. Ton thé? Y'est assez infusé là. Igloo igloo!",
+  "help": "**Commandes disponibles :**\n• `!aide` : Affiche ce message d’aide.\n\n**Stats :**\n• `!mots` : Affiche votre nombre de mots actuel pour le mois.\n• `!mots total` : Affiche à la fois votre total mensuel et votre total à vie.\n• `!leaderboard` : Affiche les auteurs les plus prolifiques pour le mois en cours.\n• `!wordcount` : En novembre, affiche l’objectif quotidien traditionnel de mots pour aujourd’hui.\n\n**Update de mots :**\n• `!mots <nombre>` : Définit le nombre de mots du mois (ex. : `!mots 1500`).\n• `!mots +<nombre>` : Ajoute des mots au total mensuel (ex. : `!mots +300`).\n• `!mots -<nombre>` : Soustrait des mots du total mensuel (ex. : `!mots -200`).\n     • Vous pouvez ajouter `hier` à la fin de ces commandes pour les appliquer à hier. Utile pour ajouter des mots juste après minuit le 1er.\n\n*Misc.*\n• `!cheer` : Reçois un message de motivation !\n• `!congrats` : Reçois un message de félicitations !\n• `!hydrate` : Rappel de rester hydraté !",
   "error_saving": "Un problème est survenu lors de l’enregistrement des données."
 }

@@ -5,7 +5,10 @@
     "help": "help",
     "wordcount": "wordcount",
     "yesterday": "yesterday",
-    "all": "all"
+    "all": "all",
+    "cheer": "cheer",
+    "congrats": "congrats",
+    "hydrate": "hydrate"
   },
   "invalid_number": "Please use a valid number: `!words <current total>`, `!words +<words to add to total>`, or `!words -<words to remove from total>`.\nFor example: `!words 1500`, `!words +300`, or `!words -200`.",
   "words_set": "Word count updated:\n- {month}: **{monthly}**",
@@ -18,6 +21,17 @@
   "wordcount_not_november": "The word count goal is only available in November.",
   "wordcount_invalid_day": "Could not determine today’s word count goal. Please try again later.",
   "wordcount_today": "The goal for today is **{target} words**.",
-  "help": "**Available Commands:**\n• `!help`: Show this helpful message.\n\n**Stats:**\n• `!words`: Show your current monthly word count.\n• `!words all`: Show both your monthly and all-time totals.\n• `!leaderboard`: Show the top writers for the current month.\n• `!wordcount`: During November, shows the traditional daily target word count for today.\n\n**Word updates:**\n• `!words <number>`: Set your word count for this month (e.g., `!words 1500`).\n• `!words +<number>`: Add words to your monthly (e.g., `!words +300`).\n• `!words -<number>`: Subtract words from your monthly total (e.g., `!words -200`).\n     • You can add `yesterday` at the end of these commands to add it to yesterday's total. Useful when adding it past midnight on the 1st.",
+  "cheer": [
+    "You can do it! https://media.tenor.com/Duz58nhPofEAAAAM/link-pompom.gif",
+    "You got this! https://media0.giphy.com/media/v1.Y2lkPTZjMDliOTUyNGR5czJoZzdtejBlZHRjcWJiYW04Zm1mYzVubTl3azMxcno1dnd5NyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/5kIh9jg6olLrZJtAf6/giphy.gif",
+    "Cheering you on! https://i0.wp.com/media4.giphy.com/media/12XDYvMJNcmLgQ/giphy.gif"
+  ],
+  "congrats": [
+    "Congratulations! https://i0.wp.com/renodadsblog.com/wp-content/uploads/2017/01/leonardo-dicaprio-celebrate-gif.gif?ssl=1",
+    "We knew you could do it! https://y.yarn.co/32615f26-f724-452b-9d04-1a954bc7a5ef_text.gif",
+    "Congrats! https://media.tenor.com/wnGqDLmrgfkAAAAM/mika-noah.gif"
+  ],
+  "hydrate": "Remember your drinks everyone! Your coffee? Getting cold. Your tea? It's been steeping long enough. Bottom's up!",
+  "help": "**Available Commands:**\n• `!help`: Show this helpful message.\n\n**Stats:**\n• `!words`: Show your current monthly word count.\n• `!words all`: Show both your monthly and all-time totals.\n• `!leaderboard`: Show the top writers for the current month.\n• `!wordcount`: During November, shows the traditional daily target word count for today.\n\n**Word updates:**\n• `!words <number>`: Set your word count for this month (e.g., `!words 1500`).\n• `!words +<number>`: Add words to your monthly (e.g., `!words +300`).\n• `!words -<number>`: Subtract words from your monthly total (e.g., `!words -200`).\n     • You can add `yesterday` at the end of these commands to add it to yesterday's total. Useful when adding it past midnight on the 1st.\n\n*Misc.*\n• `!cheer`: Get a motivational cheer!\n• `!congrats`: Get a congratulatory message!\n• `!hydrate`: Friendly reminder to stay hydrated!",
   "error_saving": "Something went wrong while saving your data."
 }

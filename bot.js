@@ -135,6 +135,18 @@ client.on('messageCreate', async message => {
     }));
   }
 
+    if (command === strings.commands.cheer) {
+      return message.reply(strings.cheer[Math.floor(Math.random() * strings.cheer.length)]);
+    }
+
+    if (command === strings.commands.congrats) {
+      return message.reply(strings.congrats[Math.floor(Math.random() * strings.congrats.length)]);
+    }
+
+    if (command === strings.commands.hydrate) {
+      return message.reply(strings.hydrate);
+    }
+
     if (command === strings.commands.words) {
     const userId = message.author.id;
     let input = args[0];
