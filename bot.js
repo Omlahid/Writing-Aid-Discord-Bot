@@ -4,6 +4,7 @@ const { DateTime } = require('luxon');
 const fs = require('fs');
 const path = require('path');
 const userData = require('./userData.json');
+const prompts = require('./prompts.json');
 
 const TOKEN = process.env.DISCORD_BOT_TOKEN;
 const PREFIX = '!';
@@ -144,7 +145,12 @@ client.on('messageCreate', async message => {
     }
 
     if (command === strings.commands.hydrate) {
-      return message.reply(strings.hydrate);
+      return message.channel.send(strings.hydrate);
+    }
+
+    if (command === strings.commands.prompt) {
+      const prompt = prompts[Math.floor(Math.random() * prompts.length)];
+      return message.reply(prompt);
     }
 
     if (command === strings.commands.words) {
