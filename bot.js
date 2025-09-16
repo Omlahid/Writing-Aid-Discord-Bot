@@ -3,7 +3,6 @@ const { Client, GatewayIntentBits } = require('discord.js');
 const { DateTime } = require('luxon');
 const fs = require('fs');
 const path = require('path');
-const userData = require('./userData.json');
 const prompts = require('./prompts.json');
 
 const TOKEN = process.env.DISCORD_BOT_TOKEN;
@@ -31,6 +30,21 @@ try {
 }
 
 const dataPath = path.join(__dirname, 'userData.json');
+
+let userData = {};
+if (fs.existsSync(dataPath)) {
+  try {
+    const raw = fs.readFileSync(dataPath, 'utf8');
+    userData = JSON.parse(raw);
+  } catch (err) {
+    console.error('Failed to parse userData.json, starting with empty object:', err);
+    userData = {};
+  }
+} else {
+  // File doesn't exist, initialize with {}
+  fs.writeFileSync(dataPath, JSON.stringify({}, null, 2));
+  userData = {};
+}
 const countPerDay = [
   1667, 3333, 5000, 6667, 8333, 10000, 11667, 13333, 15000,
   16667, 18333, 20000, 21667, 23333, 25000, 26667, 28333,
@@ -136,89 +150,119 @@ client.on('messageCreate', async message => {
     }));
   }
 
-    if (command === strings.commands.cheer) {
-      return message.reply(strings.cheer[Math.floor(Math.random() * strings.cheer.length)]);
-    }
+  if (command === strings.commands.cheer) {
+    return message.reply(strings.cheer[Math.floor(Math.random() * strings.cheer.length)]);
+  }
 
-    if (command === strings.commands.congrats) {
-      return message.reply(strings.congrats[Math.floor(Math.random() * strings.congrats.length)]);
-    }
+  if (command === strings.commands.congrats) {
+    return message.reply(strings.congrats[Math.floor(Math.random() * strings.congrats.length)]);
+  }
 
-    if (command === strings.commands.hydrate) {
-      return message.channel.send(strings.hydrate);
-    }
+  if (command === strings.commands.hydrate) {
+    return message.channel.send(strings.hydrate);
+  }
 
-    if (command === strings.commands.prompt) {
-      const prompt = prompts[Math.floor(Math.random() * prompts.length)];
-      return message.reply(prompt);
-    }
+  if (command === strings.commands.prompt) {
+    const prompt = prompts[Math.floor(Math.random() * prompts.length)];
+    return message.reply(prompt);
+  }
 
-    if (command === strings.commands.words) {
-    const userId = message.author.id;
-    let input = args[0];
-    const modifier = args[1] && args[1].toLowerCase() === strings.commands.yesterday ? 'yesterday' : 'today';
+if (command === strings.commands.words) {
+  const userId = message.author.id;
+  let input = args[0];
+  const modifier =
+    args[1] && args[1].toLowerCase() === strings.commands.yesterday
+      ? 'yesterday'
+      : 'today';
 
-    const baseDate = DateTime.now().setZone('America/Toronto');
-    const now = modifier === 'yesterday' ? baseDate.minus({ days: 1 }) : baseDate;
+  const baseDate = DateTime.now().setZone('America/Toronto');
+  const now = modifier === 'yesterday' ? baseDate.minus({ days: 1 }) : baseDate;
 
-    const monthKey = now.toFormat('yyyy-MM');
-    const displayMonth = getDisplayMonth(now, true);
+  const monthKey = now.toFormat('yyyy-MM');
+  const dayKey = now.toFormat('yyyy-MM-dd');
+  const displayMonth = getDisplayMonth(now, true);
 
-    if (!userData[userId]) {
-      userData[userId] = { total: 0, monthly: {} };
-    }
+  // Ensure user entry exists
+  if (!userData[userId]) {
+    userData[userId] = { total: 0, daily: {}, monthly: {} };
+  }
+  const userEntry = userData[userId];
 
-    const userEntry = userData[userId];
-    const currentMonthly = userEntry.monthly[monthKey] || 0;
-    const currentTotal = userEntry.total || 0;
+  // Current totals
+  const currentDaily = userEntry.daily[dayKey] || 0;
+  const currentMonthly = userEntry.monthly[monthKey] || 0;
+  const currentTotal = userEntry.total || 0;
 
-    if (!input) {
-      return message.reply(format(strings.words_show_monthly, {
+  // === SHOW MONTHLY TOTAL ===
+  if (!input) {
+    return message.reply(
+      format(strings.words_show_monthly, {
         month: displayMonth,
-        monthly: currentMonthly
-      }));
-    }
+        monthly: currentMonthly,
+      })
+    );
+  }
 
-    if (input.toLowerCase() === strings.commands.all) {
-      return message.reply(format(strings.words_show_all, {
+  // === SHOW ALL-TIME TOTAL ===
+  if (input.toLowerCase() === strings.commands.all) {
+    return message.reply(
+      format(strings.words_show_all, {
         month: getDisplayMonth(now, false),
         monthly: currentMonthly,
-        total: currentTotal
-      }));
-    }
-
-    if (!/^[-+]?\d+$/.test(input)) {
-      return message.reply(strings.invalid_number);
-    }
-
-    const parsed = parseInt(input, 10);
-    let newMonthly, newTotal;
-
-    if (input.startsWith('+') || input.startsWith('-')) {
-      newMonthly = currentMonthly + parsed;
-      newTotal = currentTotal + parsed;
-    } else {
-      newMonthly = parsed;
-      newTotal = currentTotal - currentMonthly + parsed;
-    }
-
-    newMonthly = Math.max(0, newMonthly);
-    newTotal = Math.max(0, newTotal);
-
-    userEntry.monthly[monthKey] = newMonthly;
-    userEntry.total = newTotal;
-
-    try {
-      fs.writeFileSync(dataPath, JSON.stringify(userData, null, 2));
-      return message.reply(format(strings.words_set, {
-        month: displayMonth,
-        monthly: newMonthly
-      }));
-    } catch (err) {
-      console.error('Failed to write userData.json:', err);
-      return message.reply(strings.error_saving);
-    }
+        total: currentTotal,
+      })
+    );
   }
+
+  // === VALIDATION ===
+  if (!/^[-+]?\d+$/.test(input)) {
+    return message.reply(strings.invalid_number);
+  }
+
+  const parsed = parseInt(input, 10);
+  let delta;
+
+  // === CALCULATE DELTA ===
+  if (input.startsWith('+') || input.startsWith('-')) {
+    // relative change, applied directly
+    delta = parsed;
+  } else {
+    // absolute: only apply the difference between new desired and old monthly
+    delta = parsed - currentMonthly;
+  }
+
+  // === APPLY TO DAILY ===
+  const newDaily = Math.max(0, currentDaily + delta);
+  userEntry.daily[dayKey] = newDaily;
+
+  // === RECALCULATE MONTHLY & TOTAL ===
+  const newMonthly = Object.entries(userEntry.daily)
+    .filter(([date]) => date.startsWith(monthKey))
+    .reduce((sum, [, val]) => sum + val, 0);
+
+  const newTotal = Object.values(userEntry.daily).reduce(
+    (sum, val) => sum + val,
+    0
+  );
+
+  userEntry.monthly[monthKey] = newMonthly;
+  userEntry.total = newTotal;
+
+  // === SAVE & REPLY ===
+  try {
+    fs.writeFileSync(dataPath, JSON.stringify(userData, null, 2));
+    return message.reply(
+      format(strings.words_set, {
+        month: displayMonth,
+        monthly: newMonthly,
+      })
+    );
+  } catch (err) {
+    console.error('Failed to write userData.json:', err);
+    return message.reply(strings.error_saving);
+  }
+}
+
 });
 
 client.login(TOKEN);
