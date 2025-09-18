@@ -263,6 +263,67 @@ if (command === strings.commands.words) {
   }
 }
 
+if (command === strings.commands.goal) {
+  const userId = message.author.id;
+  const baseDate = DateTime.now().setZone('America/Toronto');
+  const monthKey = baseDate.toFormat('yyyy-MM');
+  const displayMonth = getDisplayMonth(baseDate, true);
+  const daysInMonth = baseDate.daysInMonth;
+  if (!userData[userId]) {
+    userData[userId] = { total: 0, daily: {}, monthly: {}, goal: {} };
+  }
+
+  const userEntry = userData[userId];
+
+  if (!userEntry.goal) {
+    userEntry.goal = {};
+  }
+  // Case: no arguments → show current goal or instructions
+  if (!args.length) {
+    if (userEntry.goal[monthKey]) {
+      const goal = userEntry.goal[monthKey];
+      const perDay = Math.ceil(goal / daysInMonth);
+      return message.reply(format(strings.goal_show, {
+        month: displayMonth,
+        goal: goal,
+        perDay: perDay
+      }));
+    } else {
+      return message.reply(strings.goal_none);
+    }
+  }
+
+  const input = args.join(''); // join all args in case user writes "50 000"
+
+  if (!input) {
+    return message.reply(strings.invalid_number);
+  }
+
+  // normalize: remove spaces, commas, dots (but not leading minus/plus)
+  const normalized = input.replace(/[\s,\.]/g, '');
+
+  if (!/^\d+$/.test(normalized)) {
+    return message.reply(strings.invalid_number);
+  }
+
+  const parsed = parseInt(normalized, 10);
+
+  userEntry.goal[monthKey] = parsed;
+
+  try {
+    fs.writeFileSync(dataPath, JSON.stringify(userData, null, 2));
+    return message.reply(format(strings.goal_set, {
+      month: displayMonth,
+      perDay: Math.ceil(parsed / daysInMonth),
+      goal: parsed
+    }));
+  } catch (err) {
+    console.error('Failed to write userData.json:', err);
+    return message.reply(strings.error_saving);
+  }
+}
+
+
 });
 
 client.login(TOKEN);

@@ -9,7 +9,8 @@
     "cheer": "cheer",
     "congrats": "congrats",
     "hydrate": "hydrate",
-    "prompt": "prompt"
+    "prompt": "prompt",
+    "goal": "goal"
   },
   "invalid_number": "Please use a valid number: `!words <current total>`, `!words +<words to add to total>`, or `!words -<words to remove from total>`.\nFor example: `!words 1500`, `!words +300`, or `!words -200`.",
   "words_set": "Word count updated:\n- {month}: **{monthly}**",
@@ -22,6 +23,9 @@
   "wordcount_not_november": "The word count goal is only available in November.",
   "wordcount_invalid_day": "Could not determine today’s word count goal. Please try again later.",
   "wordcount_today": "The goal for today is **{target} words**.",
+  "goal_set": "Your word count goal has been set to **{goal} words**. That's **{perDay} words per day**.",
+  "goal_show": "Your goal for this month is {goal} words ({perDay} per day).",
+  "goal_none": "You don’t have a goal set for this month. Use `!goal 50000` to set one.",
   "cheer": [
     "You can do it! https://media.tenor.com/Duz58nhPofEAAAAM/link-pompom.gif",
     "You got this! https://media0.giphy.com/media/v1.Y2lkPTZjMDliOTUyNGR5czJoZzdtejBlZHRjcWJiYW04Zm1mYzVubTl3azMxcno1dnd5NyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/5kIh9jg6olLrZJtAf6/giphy.gif",
