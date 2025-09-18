@@ -20,9 +20,8 @@
   "leaderboard_empty": "No words yet for **{month}**.",
   "leaderboard_title": "🏆🎉🏅 **Monthly Leaderboard ({month}):**\n{entries}",
   "leaderboard_entry": "{rank}. {username} - {count} words",
-  "wordcount_not_november": "The word count goal is only available in November.",
   "wordcount_invalid_day": "Could not determine today’s word count goal. Please try again later.",
-  "wordcount_today": "The goal for today is **{target} words**.",
+  "wordcount_today": "Your goal for today is **{target} words**. You are currently at **{currentWordCount} words**.",
   "goal_set": "Your word count goal has been set to **{goal} words**. That's **{perDay} words per day**.",
   "goal_show": "Your goal for this month is {goal} words ({perDay} per day).",
   "goal_none": "You don’t have a goal set for this month. Use `!goal 50000` to set one.",
@@ -37,6 +36,6 @@
     "Congrats! https://media.tenor.com/wnGqDLmrgfkAAAAM/mika-noah.gif"
   ],
   "hydrate": "Remember your drinks everyone! Your coffee? Getting cold. Your tea? It's been steeping long enough. Bottom's up!",
-  "help": "**Available Commands:**\n• `!help`: Show this helpful message.\n\n**Stats:**\n• `!words`: Show your current monthly word count.\n• `!words all`: Show both your monthly and all-time totals.\n• `!leaderboard`: Show the top writers for the current month.\n• `!wordcount`: During November, shows the traditional daily target word count for today.\n\n**Word updates:**\n• `!words <number>`: Set your word count for this month (e.g., `!words 1500`).\n• `!words +<number>`: Add words to your monthly (e.g., `!words +300`).\n• `!words -<number>`: Subtract words from your monthly total (e.g., `!words -200`).\n     • You can add `yesterday` at the end of these commands to add it to yesterday's total. Useful when adding it past midnight on the 1st.\n\n**Misc.**\n• `!cheer`: Get a motivational cheer!\n• `!congrats`: Get a congratulatory message!\n• `!hydrate`: Friendly reminder to stay hydrated!\n• `!prompt`: Get a random writing prompt.",
+  "help": "**Available Commands:**\n• `!help`: Show this helpful message.\n\n**Stats:**\n• `!words`: Show your current monthly word count.\n• `!words all`: Show both your monthly and all-time totals.\n• `!leaderboard`: Show the top writers for the current month.\n• `!goal <number>: Set a personal monthly goal.`\n• `!wordcount`: Get your daily target word count for today.\n\n**Word updates:**\n• `!words <number>`: Set your word count for this month (e.g., `!words 1500`).\n• `!words +<number>`: Add words to your monthly (e.g., `!words +300`).\n• `!words -<number>`: Subtract words from your monthly total (e.g., `!words -200`).\n     • You can add `yesterday` at the end of these commands to add it to yesterday's total. Useful when adding it past midnight on the 1st.\n\n**Misc.**\n• `!cheer`: Get a motivational cheer!\n• `!congrats`: Get a congratulatory message!\n• `!hydrate`: Friendly reminder to stay hydrated!\n• `!prompt`: Get a random writing prompt.",
   "error_saving": "Something went wrong while saving your data."
 }

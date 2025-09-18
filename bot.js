@@ -45,12 +45,6 @@ if (fs.existsSync(dataPath)) {
   fs.writeFileSync(dataPath, JSON.stringify({}, null, 2));
   userData = {};
 }
-const countPerDay = [
-  1667, 3333, 5000, 6667, 8333, 10000, 11667, 13333, 15000,
-  16667, 18333, 20000, 21667, 23333, 25000, 26667, 28333,
-  30000, 31667, 33333, 35000, 36667, 38333, 40000, 41667,
-  43333, 45000, 46667, 48333, 50000
-];
 
 function format(str, data = {}) {
   return str.replace(/{(.*?)}/g, (_, key) => data[key] ?? `{${key}}`);
@@ -131,24 +125,58 @@ client.on('messageCreate', async message => {
     }));
   }
 
-  if (command === strings.commands.wordcount) {
-    const now = DateTime.now().setZone('America/Toronto');
+if (command === strings.commands.wordcount) {
+  const userId = message.author.id;
+  const now = DateTime.now().setZone('America/Toronto');
+  const monthKey = now.toFormat('yyyy-MM');
+  const displayMonth = getDisplayMonth(now, true);
+  const daysInMonth = now.daysInMonth;
+  const day = now.day;
 
-    if (now.month !== 11) {
-      return message.reply(strings.wordcount_not_november);
-    }
+  if (!userData[userId]) {
+    userData[userId] = { total: 0, daily: {}, monthly: {}, goal: {} };
+  }
+  const userEntry = userData[userId];
+  if (!userEntry.goal) {
+    userEntry.goal = {};
+  }
 
-    const day = now.day;
-    if (day > countPerDay.length) {
-      return message.reply(strings.wordcount_invalid_day);
-    }
+  const monthlyGoal = userEntry.goal[monthKey] || null;
+  const currentWordCount = userEntry.monthly[monthKey] || 0;
+
+  // --- Case 1: November with NO goal set → fallback to NaNoWriMo default ---
+  if (now.month === 11 && !monthlyGoal) {
+    const countPerDay = [
+      1667, 3333, 5000, 6667, 8333, 10000, 11667, 13333, 15000,
+      16667, 18333, 20000, 21667, 23333, 25000, 26667, 28333,
+      30000, 31667, 33333, 35000, 36667, 38333, 40000, 41667,
+      43333, 45000, 46667, 48333, 50000
+    ];
 
     const target = countPerDay[day - 1];
     return message.reply(format(strings.wordcount_today, {
       day,
-      target
+      target,
+      currentWordCount
     }));
   }
+
+  // --- Case 2: Has a monthly goal set (any month, incl. November) ---
+  if (monthlyGoal) {
+    const perDay = Math.ceil(monthlyGoal / daysInMonth);
+    const target = perDay * day;
+
+    return message.reply(format(strings.wordcount_today, {
+      day,
+      target,
+      currentWordCount
+    }));
+  }
+
+  // --- Case 3: No goal set & not November fallback ---
+  return message.reply(strings.goal_none.replace('{month}', displayMonth));
+}
+
 
   if (command === strings.commands.cheer) {
     return message.reply(strings.cheer[Math.floor(Math.random() * strings.cheer.length)]);

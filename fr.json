@@ -20,9 +20,8 @@
   "leaderboard_empty": "Aucun mot enregistré pour **{month}**.",
   "leaderboard_title": "🏆🎉🏅 **Leaderboard du mois ({month}) :**\n{entries}",
   "leaderboard_entry": "{rank}. {username} - {count} mots",
-  "wordcount_not_november": "L’objectif de mots est seulement disponible en novembre.",
   "wordcount_invalid_day": "Impossible de déterminer l’objectif de mots pour aujourd’hui. Veuillez réessayer plus tard.",
-  "wordcount_today": "Objectif pour aujourd’hui : **{target} mots**.",
+  "wordcount_today": "Ton objectif pour aujourd’hui : **{target} mots**. Tu as présentement **{currentWordCount} mots**.",
   "goal_set": "Ton but du mois a été fixé à **{goal} mots**. Ça fait **{perDay} mots par jour**.",
   "goal_show": "Ton but du mois est de {goal} mots ({perDay} par jour).",
   "goal_none": "Tu n’as pas de but pour ce mois. Utilise `!but 50000` pour en ajouter un.",
@@ -37,6 +36,6 @@
     "Congrats ! https://media.tenor.com/wnGqDLmrgfkAAAAM/mika-noah.gif"
   ],
   "hydrate": "Oubliez pas vos drinks gang! Ton café? Y devient froid. Ton thé? Y'est assez infusé là. Igloo igloo!",
-  "help": "**Commandes disponibles :**\n• `!aide` : Affiche ce message d’aide.\n\n**Stats :**\n• `!mots` : Affiche ton nombre de mots actuel pour le mois.\n• `!mots total` : Affiche à la fois ton total mensuel et à vie.\n• `!leaderboard` : Affiche les auteurs les plus prolifiques pour le mois en cours.\n• `!wordcount` : En novembre, affiche l’objectif quotidien traditionnel de mots pour aujourd’hui.\n\n**Update de mots :**\n• `!mots <nombre>` : Définit le nombre de mots du mois (ex. : `!mots 1500`).\n• `!mots +<nombre>` : Ajoute des mots au total mensuel (ex. : `!mots +300`).\n• `!mots -<nombre>` : Soustrait des mots du total mensuel (ex. : `!mots -200`).\n     • On peut ajouter `hier` à la fin de ces commandes pour les appliquer à hier. Utile pour ajouter des mots juste après minuit le 1er.\n\n**Misc.**\n• `!cheer` : Reçois un message de motivation !\n• `!congrats` : Reçois un message de félicitations !\n• `!hydrate` : Rappel de rester hydraté !\n• `!prompt` : Reçois un prompt au hasard (en anglais seulement).",
+  "help": "**Commandes disponibles :**\n• `!aide` : Affiche ce message d’aide.\n\n**Stats :**\n• `!mots` : Affiche ton nombre de mots actuel pour le mois.\n• `!mots total` : Affiche à la fois ton total mensuel et à vie.\n• `!leaderboard` : Affiche les auteurs les plus prolifiques pour le mois en cours.\n• `!but <nombre> : Ajoute un but de mots à écrire ce mois-ci.`\n• `!wordcount` : EAffiche ton objectif de mots pour aujourd’hui.\n\n**Update de mots :**\n• `!mots <nombre>` : Définit le nombre de mots du mois (ex. : `!mots 1500`).\n• `!mots +<nombre>` : Ajoute des mots au total mensuel (ex. : `!mots +300`).\n• `!mots -<nombre>` : Soustrait des mots du total mensuel (ex. : `!mots -200`).\n     • On peut ajouter `hier` à la fin de ces commandes pour les appliquer à hier. Utile pour ajouter des mots juste après minuit le 1er.\n\n**Misc.**\n• `!cheer` : Reçois un message de motivation !\n• `!congrats` : Reçois un message de félicitations !\n• `!hydrate` : Rappel de rester hydraté !\n• `!prompt` : Reçois un prompt au hasard (en anglais seulement).",
   "error_saving": "Un problème est survenu lors de l’enregistrement des données."
 }
