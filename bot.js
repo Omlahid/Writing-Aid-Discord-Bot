@@ -79,10 +79,12 @@ client.on('messageCreate', async message => {
   const command = args.shift().toLowerCase();
 
   if (command === 'help' || command === strings.commands.help) {
+    console.log(message.author.username, 'requested help');
     return message.reply(strings.help);
   }
 
   if (command === strings.commands.leaderboard) {
+    console.log(message.author.username, 'requested leaderboard');
     const now = DateTime.now().setZone(process.env.TIMEZONE || 'America/Toronto');
     const monthKey = now.toFormat('yyyy-MM');
     const displayMonth = getDisplayMonth(now, false);
@@ -126,6 +128,7 @@ client.on('messageCreate', async message => {
   }
 
 if (command === strings.commands.wordcount) {
+  console.log(message.author.username, 'requested wordcount');
   const userId = message.author.id;
   const now = DateTime.now().setZone('America/Toronto');
   const monthKey = now.toFormat('yyyy-MM');
@@ -179,18 +182,22 @@ if (command === strings.commands.wordcount) {
 
 
   if (command === strings.commands.cheer) {
+    console.log(message.author.username, 'requested cheer');
     return message.reply(strings.cheer[Math.floor(Math.random() * strings.cheer.length)]);
   }
 
   if (command === strings.commands.congrats) {
+    console.log(message.author.username, 'requested congrats');
     return message.reply(strings.congrats[Math.floor(Math.random() * strings.congrats.length)]);
   }
 
   if (command === strings.commands.hydrate) {
+    console.log(message.author.username, 'requested hydrate');
     return message.channel.send(strings.hydrate);
   }
 
   if (command === strings.commands.prompt) {
+    console.log(message.author.username, 'requested prompt');
     const prompt = prompts[Math.floor(Math.random() * prompts.length)];
     return message.reply(prompt);
   }
@@ -223,6 +230,7 @@ if (command === strings.commands.words) {
 
   // === SHOW MONTHLY TOTAL ===
   if (!input) {
+    console.log(message.author.username, 'requested current monthly total');
     return message.reply(
       format(strings.words_show_monthly, {
         month: displayMonth,
@@ -233,6 +241,7 @@ if (command === strings.commands.words) {
 
   // === SHOW ALL-TIME TOTAL ===
   if (input.toLowerCase() === strings.commands.all) {
+    console.log(message.author.username, 'requested all-time total');
     return message.reply(
       format(strings.words_show_all, {
         month: getDisplayMonth(now, false),
@@ -277,6 +286,7 @@ if (command === strings.commands.words) {
   userEntry.total = newTotal;
 
   // === SAVE & REPLY ===
+  console.log(message.author.username, `set words for ${modifier} to ${newDaily} (delta ${delta})`);
   try {
     fs.writeFileSync(dataPath, JSON.stringify(userData, null, 2));
     return message.reply(
@@ -311,6 +321,7 @@ if (command === strings.commands.goal) {
     if (userEntry.goal[monthKey]) {
       const goal = userEntry.goal[monthKey];
       const perDay = Math.ceil(goal / daysInMonth);
+      console.log(message.author.username, 'requested current goal');
       return message.reply(format(strings.goal_show, {
         month: displayMonth,
         goal: goal,
@@ -337,7 +348,7 @@ if (command === strings.commands.goal) {
   const parsed = parseInt(normalized, 10);
 
   userEntry.goal[monthKey] = parsed;
-
+  console.log(message.author.username, `set goal for ${displayMonth} to ${parsed}`);
   try {
     fs.writeFileSync(dataPath, JSON.stringify(userData, null, 2));
     return message.reply(format(strings.goal_set, {
