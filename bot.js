@@ -108,7 +108,7 @@ client.on('messageCreate', async message => {
           const user = await client.users.fetch(entry.userId);
           return format(strings.leaderboard_entry, {
             rank: index + 1,
-            username: user.username,
+            username: user.nickname || user.displayName || user.username,
             count: entry.count
           });
         } catch {
