@@ -84,48 +84,52 @@ client.on('messageCreate', async message => {
   }
 
   if (command === strings.commands.leaderboard) {
-    console.log(message.author.username, 'requested leaderboard');
-    const now = DateTime.now().setZone(process.env.TIMEZONE || 'America/Toronto');
-    const monthKey = now.toFormat('yyyy-MM');
-    const displayMonth = getDisplayMonth(now, false);
+  console.log(message.author.username, 'requested leaderboard');
+  const now = DateTime.now().setZone(process.env.TIMEZONE || 'America/Toronto');
+  const monthKey = now.toFormat('yyyy-MM');
+  const displayMonth = getDisplayMonth(now, false);
 
-    const leaderboard = Object.entries(userData)
-      .map(([id, data]) => ({
-        userId: id,
-        count: data.monthly?.[monthKey] || 0
-      }))
-      .filter(entry => entry.count > 0)
-      .sort((a, b) => b.count - a.count)
-      .slice(0, 10);
+  const showAll = args[0] && args[0].toLowerCase() === strings.commands.all;
 
-    if (leaderboard.length === 0) {
-      return message.reply(format(strings.leaderboard_empty, { month: displayMonth }));
-    }
+  const leaderboard = Object.entries(userData)
+    .map(([id, data]) => ({
+      userId: id,
+      count: data.monthly?.[monthKey] || 0
+    }))
+    .filter(entry => entry.count > 0)
+    .sort((a, b) => b.count - a.count);
 
-    const lines = await Promise.all(
-      leaderboard.map(async (entry, index) => {
-        try {
-          const user = await client.users.fetch(entry.userId);
-          return format(strings.leaderboard_entry, {
-            rank: index + 1,
-            username: user.nickname || user.displayName || user.username,
-            count: entry.count
-          });
-        } catch {
-          return format(strings.leaderboard_entry, {
-            rank: index + 1,
-            username: `Unknown (${entry.userId})`,
-            count: entry.count
-          });
-        }
-      })
-    );
+  const limitedLeaderboard = showAll ? leaderboard : leaderboard.slice(0, 10);
 
-    return message.reply(format(strings.leaderboard_title, {
-      month: displayMonth,
-      entries: lines.join('\n')
-    }));
+  if (limitedLeaderboard.length === 0) {
+    return message.reply(format(strings.leaderboard_empty, { month: displayMonth }));
   }
+
+  const lines = await Promise.all(
+    limitedLeaderboard.map(async (entry, index) => {
+      try {
+        const user = await client.users.fetch(entry.userId);
+        return format(strings.leaderboard_entry, {
+          rank: index + 1,
+          username: user.nickname || user.displayName || user.username,
+          count: entry.count
+        });
+      } catch {
+        return format(strings.leaderboard_entry, {
+          rank: index + 1,
+          username: `Unknown (${entry.userId})`,
+          count: entry.count
+        });
+      }
+    })
+  );
+
+  return message.reply(format(strings.leaderboard_title, {
+    month: displayMonth,
+    entries: lines.join('\n')
+  }));
+}
+
 
 if (command === strings.commands.wordcount) {
   console.log(message.author.username, 'requested wordcount');
