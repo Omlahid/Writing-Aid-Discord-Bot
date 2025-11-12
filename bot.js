@@ -273,7 +273,7 @@ if (command === strings.commands.words) {
   }
 
   // === APPLY TO DAILY ===
-  const newDaily = Math.max(0, currentDaily + delta);
+  const newDaily = currentDaily + delta;
   userEntry.daily[dayKey] = newDaily;
 
   // === RECALCULATE MONTHLY & TOTAL ===
