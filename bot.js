@@ -184,6 +184,29 @@ if (command === strings.commands.wordcount) {
   return message.reply(strings.goal_none.replace('{month}', displayMonth));
 }
 
+  if (command === strings.commands.countdown) {
+    console.log(message.author.username, 'requested month countdown');
+    const now = DateTime.now().setZone(process.env.TIMEZONE || 'America/Toronto');
+    const daysLeft = now.daysInMonth - now.day;
+    const month = getDisplayMonth(now, true);
+    let reply = format(strings.countdown, { days: daysLeft, month });
+
+    const userId = message.author.id;
+    const monthKey = now.toFormat('yyyy-MM');
+    const customGoal = userData[userId]?.goal?.[monthKey];
+    const goal = customGoal ?? (now.month === 11 ? 50000 : null);
+    const currentWordCount = userData[userId]?.monthly?.[monthKey] || 0;
+    const wordsRemaining = goal === null ? 0 : goal - currentWordCount;
+
+    if (wordsRemaining > 0) {
+      const daysAvailable = Math.max(daysLeft, 1);
+      const wordsPerDay = Math.ceil(wordsRemaining / daysAvailable);
+      reply += `\n${format(strings.countdown_goal, { wordsPerDay })}`;
+    }
+
+    return message.reply(reply);
+  }
+
 
   if (command === strings.commands.cheer) {
     console.log(message.author.username, 'requested cheer');

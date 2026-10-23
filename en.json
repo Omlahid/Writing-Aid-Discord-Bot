@@ -10,7 +10,8 @@
     "congrats": "congrats",
     "hydrate": "hydrate",
     "prompt": "prompt",
-    "goal": "goal"
+    "goal": "goal",
+    "countdown": "countdown"
   },
   "invalid_number": "Please use a valid number: `!words <current total>`, `!words +<words to add to total>`, or `!words -<words to remove from total>`.\nFor example: `!words 1500`, `!words +300`, or `!words -200`.",
   "words_set": "Word count updated:\n- {month}: **{monthly}**",
@@ -25,6 +26,8 @@
   "goal_set": "Your word count goal has been set to **{goal} words**. That's **{perDay} words per day**.",
   "goal_show": "Your goal for this month is {goal} words ({perDay} per day).",
   "goal_none": "You don’t have a goal set for this month. Use `!goal 50000` to set one.",
+  "countdown": "There are **{days} days** left before the end of the month.",
+  "countdown_goal": "To reach your goal, you need towrite **{wordsPerDay} words per day** until the end of the month.",
   "cheer": [
     "You can do it! https://media.tenor.com/Duz58nhPofEAAAAM/link-pompom.gif",
     "You got this! https://media0.giphy.com/media/v1.Y2lkPTZjMDliOTUyNGR5czJoZzdtejBlZHRjcWJiYW04Zm1mYzVubTl3azMxcno1dnd5NyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/5kIh9jg6olLrZJtAf6/giphy.gif",
@@ -36,6 +39,6 @@
     "Congrats! https://media.tenor.com/wnGqDLmrgfkAAAAM/mika-noah.gif"
   ],
   "hydrate": "Remember your drinks everyone! Your coffee? Getting cold. Your tea? It's been steeping long enough. Bottom's up!",
-  "help": "**Available Commands:**\n• `!help`: Show this helpful message.\n\n**Stats:**\n• `!words`: Show your current monthly word count.\n• `!words all`: Show both your monthly and all-time totals.\n• `!leaderboard`: Show the top 10 writers for the month. Add `all` at the end to get the full leaderboard.\n• `!goal <number>`: Set a personal monthly goal.\n• `!wordcount`: Get your daily target word count for today.\n\n**Word updates:**\n• `!words <number>`: Set your word count for this month (e.g., `!words 1500`).\n• `!words +<number>`: Add words to your monthly (e.g., `!words +300`).\n• `!words -<number>`: Subtract words from your monthly total (e.g., `!words -200`).\n     • You can add `yesterday` at the end of these commands to add it to yesterday's total. Useful when adding it past midnight on the 1st.\n\n**Misc.**\n• `!cheer`: Get a motivational cheer!\n• `!congrats`: Get a congratulatory message!\n• `!hydrate`: Friendly reminder to stay hydrated!\n• `!prompt`: Get a random writing prompt.",
+  "help": "**Available Commands:**\n• `!help`: Show this helpful message.\n\n**Stats:**\n• `!words`: Show your current monthly word count.\n• `!words all`: Show both your monthly and all-time totals.\n• `!leaderboard`: Show the top 10 writers for the month. Add `all` at the end to get the full leaderboard.\n• `!goal <number>`: Set a personal monthly goal.\n• `!wordcount`: Get your daily target word count for today.\n• `!countdown`: Check how many days are left in this month.\n\n**Word updates:**\n• `!words <number>`: Set your word count for this month (e.g., `!words 1500`).\n• `!words +<number>`: Add words to your monthly (e.g., `!words +300`).\n• `!words -<number>`: Subtract words from your monthly total (e.g., `!words -200`).\n     • You can add `yesterday` at the end of these commands to add it to yesterday's total. Useful when adding it past midnight on the 1st.\n\n**Misc.**\n• `!cheer`: Get a motivational cheer!\n• `!congrats`: Get a congratulatory message!\n• `!hydrate`: Friendly reminder to stay hydrated!\n• `!prompt`: Get a random writing prompt.",
   "error_saving": "Something went wrong while saving your data."
 }
